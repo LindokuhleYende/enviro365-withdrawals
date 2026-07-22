@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enviro365 Investments | Withdrawal Notices</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="topbar">
+        <div class="brand">
+            <span class="brand-mark">E365</span>
+            <div>
+                <h1>Enviro365 Investments</h1>
+                <p>Withdrawal Notice Portal</p>
+            </div>
+        </div>
+        <div class="investor-select">
+            <label for="investorSelect">Investor</label>
+            <select id="investorSelect"></select>
+        </div>
+    </header>
+
+    <main>
+        <div id="toast" class="toast hidden"></div>
+
+        <!-- Portfolio Dashboard -->
+        <section class="card">
+            <div class="card-header">
+                <h2>Portfolio Dashboard</h2>
+                <span id="investorMeta" class="muted"></span>
+            </div>
+            <div class="summary-row">
+                <div class="summary-box">
+                    <span class="label">Total Balance</span>
+                    <span id="totalBalance" class="value">—</span>
+                </div>
+                <div class="summary-box">
+                    <span class="label">Products Held</span>
+                    <span id="productCount" class="value">—</span>
+                </div>
+            </div>
+            <table class="data-table" id="productsTable">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Type</th>
+                        <th>Balance</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+
+        <div class="two-col">
+            <!-- Withdrawal Form -->
+            <section class="card">
+                <div class="card-header">
+                    <h2>Submit Withdrawal Notice</h2>
+                </div>
+                <form id="withdrawalForm">
+                    <div class="form-group">
+                        <label for="productSelect">Product</label>
+                        <select id="productSelect" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="amountInput">Amount (ZAR)</label>
+                        <input type="number" id="amountInput" min="0.01" step="0.01" placeholder="e.g. 5000.00" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="notesInput">Notes (optional)</label>
+                        <textarea id="notesInput" rows="2" placeholder="Reason for withdrawal"></textarea>
+                    </div>
+                    <button type="submit" class="btn-primary">Submit Withdrawal</button>
+                    <p id="formError" class="form-error hidden"></p>
+                </form>
+            </section>
+
+            <!-- CSV Export -->
+            <section class="card">
+                <div class="card-header">
+                    <h2>Export Statement</h2>
+                </div>
+                <div class="form-group">
+                    <label for="filterStatus">Status</label>
+                    <select id="filterStatus">
+                        <option value="">All</option>
+                        <option value="PENDING">Pending</option>
+                        <option value="APPROVED">Approved</option>
+                        <option value="REJECTED">Rejected</option>
+                    </select>
+                </div>
+                <div class="form-group-row">
+                    <div class="form-group">
+                        <label for="filterFrom">From</label>
+                        <input type="date" id="filterFrom">
+                    </div>
+                    <div class="form-group">
+                        <label for="filterTo">To</label>
+                        <input type="date" id="filterTo">
+                    </div>
+                </div>
+                <button id="downloadCsvBtn" class="btn-secondary">Download CSV</button>
+                <p class="muted small">Downloads the current investor's withdrawal statement, filtered by the options above.</p>
+            </section>
+        </div>
+
+        <!-- Withdrawal History -->
+        <section class="card">
+            <div class="card-header">
+                <h2>Withdrawal History</h2>
+                <button id="refreshHistoryBtn" class="btn-link">Refresh</button>
+            </div>
+            <table class="data-table" id="historyTable">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Product</th>
+                        <th>Amount</th>
+                        <th>Balance Before</th>
+                        <th>Balance After</th>
+                        <th>Status</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <p id="historyEmpty" class="muted small hidden">No withdrawal notices yet for this investor.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>Enviro365 Investments &mdash; Withdrawal Notice Automation &middot;
+            <a href="/swagger-ui.html" target="_blank" rel="noopener">API Docs</a> &middot;
+            <a href="/h2-console" target="_blank" rel="noopener">H2 Console</a>
+        </p>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
